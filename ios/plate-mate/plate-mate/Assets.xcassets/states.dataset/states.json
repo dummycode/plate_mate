@@ -1,0 +1,12 @@
+{
+    "plates": [
+        "georgia": {
+            "name": "Georgia",
+            "asset": "georgia"
+        },
+        "new_york": {
+            "name": "New York",
+            "asset": "new_york"
+        }
+    ]
+}
