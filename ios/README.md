@@ -1,3 +1,3 @@
 # iOS App
 
-iOS app for the Plate Tracker.
+iOS app for Plate Mate.
