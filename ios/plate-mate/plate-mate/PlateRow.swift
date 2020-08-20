@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PlateRow: View {
-    var plate: Plate
+    var plate: MyPlate
     
     var body: some View {
         HStack {
@@ -20,17 +20,20 @@ struct PlateRow: View {
             }
             .frame(height: 50)
             Text(plate.name)
-//            if plate.seen {
-//                Text("Seen!")
-//            }
             Spacer()
+            if plate.seen {
+                Text("Seen!")
+            } else {
+                Text("Not seen")
+            }
         }
+        .contentShape(Rectangle())
         .padding(10)
     }
 }
 
 struct PlateRow_Previews: PreviewProvider {
     static var previews: some View {
-        PlateRow(plate: Plate(name: "Georgia", asset: "georgia"))
+        PlateRow(plate: MyPlate(name: "Georgia", asset: "georgia"))
     }
 }

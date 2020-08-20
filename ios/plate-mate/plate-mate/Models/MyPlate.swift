@@ -9,11 +9,12 @@
 import Foundation
 import SwiftUI
 
-let plateData: [Plate] = load("plates.json")
+let plateData: [MyPlate] = load("plates.json")
 
-class Plate: Codable, Identifiable {
+class MyPlate: Codable, Identifiable {
     var name: String
     var asset: String
+    var seen: Bool
     
     var image: Image {
         Image("plates/" + asset)
@@ -22,5 +23,6 @@ class Plate: Codable, Identifiable {
     init(name: String, asset: String) {
         self.name = name
         self.asset = "plates/" + asset
+        self.seen = false
     }
 }

@@ -18,6 +18,10 @@ struct GameList: View {
                 GameRow(game: Game(name: "Alaska Road Trip"))
             }
             .navigationBarTitle(Text("Games"))
+            .navigationBarItems(trailing:           NavigationLink(destination: GameForm()) {
+                    Text("New")
+                }
+            )
         }
     }
 }

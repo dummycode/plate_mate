@@ -1,10 +1,12 @@
 [
     {
         "name": "Georgia",
-        "asset": "georgia"
+        "asset": "georgia",
+        "seen": false
     },
     {
         "name": "New York",
-        "asset": "new_york"
+        "asset": "new_york",
+        "seen": false
     }
 ]

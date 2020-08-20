@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import CoreData
 
-class Game: Codable, Identifiable {
+class Game {
     var name: String
-    var plates: [Plate]
+    var plates: [MyPlate]
     var updatedAt: Date
     
     init(name: String) {
@@ -22,7 +23,9 @@ class Game: Codable, Identifiable {
     var updatedAtString: String {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
-        return formatter.string(from: updatedAt)
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.setLocalizedDateFormatFromTemplate("MMddYYYY")
         
+        return formatter.string(from: updatedAt)
     }
 }
