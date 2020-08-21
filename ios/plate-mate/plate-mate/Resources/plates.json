@@ -2,11 +2,9 @@
     {
         "name": "Georgia",
         "asset": "georgia",
-        "seen": false
     },
     {
         "name": "New York",
         "asset": "new_york",
-        "seen": false
     }
 ]

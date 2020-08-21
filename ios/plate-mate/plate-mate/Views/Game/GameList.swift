@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct GameList: View {
+    var games: [Game] = loadGames()
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: PlateList()) {
-                    GameRow(game: Game(name: "At Home"))
+                ForEach(games) { game in
+                    self.makeGameRow(game: game)
                 }
-                GameRow(game: Game(name: "Alaska Road Trip"))
             }
             .navigationBarTitle(Text("Games"))
             .navigationBarItems(trailing:           NavigationLink(destination: GameForm()) {
@@ -23,6 +23,14 @@ struct GameList: View {
                 }
             )
         }
+    }
+    
+    func makeGameRow(game: Game) -> some View {
+        let plates = game.plates!.array as? [Plate]
+        return
+            NavigationLink(destination: PlateList(title: game.name!, plates: plates ?? [])) {
+                GameRow(game: game)
+            }
     }
 }
 

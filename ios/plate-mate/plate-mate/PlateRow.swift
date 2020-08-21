@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PlateRow: View {
-    var plate: MyPlate
+    var plate: Plate
     
     var body: some View {
         HStack {
@@ -19,8 +19,10 @@ struct PlateRow: View {
                     .aspectRatio(contentMode: .fit)
             }
             .frame(height: 50)
-            Text(plate.name)
+            Text(plate.name!)
+            
             Spacer()
+            
             if plate.seen {
                 Text("Seen!")
             } else {
@@ -34,6 +36,10 @@ struct PlateRow: View {
 
 struct PlateRow_Previews: PreviewProvider {
     static var previews: some View {
-        PlateRow(plate: MyPlate(name: "Georgia", asset: "georgia"))
+        let plate = Plate()
+        plate.name = "Georgia"
+        plate.imageName = "georgia"
+        
+        return PlateRow(plate: plate)
     }
 }

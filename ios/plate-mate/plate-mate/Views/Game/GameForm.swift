@@ -25,10 +25,14 @@ struct GameForm: View {
             }
         }
         .navigationBarTitle("New Game")
-        .navigationBarItems(trailing:           NavigationLink(destination: PlateList()) {
+        .navigationBarItems(trailing: NavigationLink(destination: PlateList(title: name, plates: [])) {
                 Text("Save")
             }
         )
+    }
+    
+    func createGame() {
+        saveGame(name: name)
     }
 }
 

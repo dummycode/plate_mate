@@ -6,6 +6,7 @@
 //  Copyright © 2020 Henry Harris. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
 struct GameRow: View {
@@ -13,7 +14,7 @@ struct GameRow: View {
     
     var body: some View {
         HStack {
-            Text(game.name)
+            Text(game.name!)
             Spacer()
             Text(game.updatedAtString)
         }
@@ -23,6 +24,10 @@ struct GameRow: View {
 
 struct GameRow_Previews: PreviewProvider {
     static var previews: some View {
-        GameRow(game: Game(name: "Road Trip"))
+        let game = Game()
+        game.name = "Road Trip"
+        game.updatedAt = Date()
+            
+        return GameRow(game: game)
     }
 }

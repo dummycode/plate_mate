@@ -7,28 +7,10 @@
 //
 
 import Foundation
-import CoreData
-
-func loadPlates() -> [Plate] {
-    let mainContext = CoreDataManager.shared.mainContext
-    let fetchRequest: NSFetchRequest<Plate> = Plate.fetchRequest()
-    do {
-        let results = try mainContext.fetch(fetchRequest)
-        
-        print(results)
-        
-        return results
-    }
-    catch {
-        debugPrint(error)
-    }
-    
-    return []
-}
 
 class MyGame {
     var name: String
-    var plates: [MyPlate]
+    var plates: [Plate]
     var updatedAt: Date
     
     init(name: String) {

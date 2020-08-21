@@ -9,20 +9,20 @@
 import Foundation
 import SwiftUI
 
-let plateData: [MyPlate] = load("plates.json")
+let codablePlateData: [CodablePlate] = load("plates.json")
 
-class MyPlate: Codable, Identifiable {
+let plateData: [Plate] = codablePlateData.map { codablePlate in
+    let plate = createPlate(name: codablePlate.name, imageName: codablePlate.asset)
+    
+    return plate
+}
+
+class CodablePlate: Codable {
     var name: String
     var asset: String
-    var seen: Bool
-    
-    var image: Image {
-        Image("plates/" + asset)
-    }
     
     init(name: String, asset: String) {
         self.name = name
-        self.asset = "plates/" + asset
-        self.seen = false
+        self.asset = asset
     }
 }

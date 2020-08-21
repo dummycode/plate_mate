@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA11E9CE24F053C800D81765 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11E9CD24F053C800D81765 /* CoreDataManager.swift */; };
+		BA11E9D024F056A300D81765 /* Game+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11E9CF24F056A300D81765 /* Game+Extensions.swift */; };
+		BA11E9D224F05EDE00D81765 /* Plate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11E9D124F05EDE00D81765 /* Plate+Extensions.swift */; };
 		BA2C87F924EC799D00974148 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C87F824EC799D00974148 /* AppDelegate.swift */; };
 		BA2C87FB24EC799D00974148 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C87FA24EC799D00974148 /* SceneDelegate.swift */; };
 		BA2C87FD24EC799D00974148 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C87FC24EC799D00974148 /* ContentView.swift */; };
@@ -20,7 +23,7 @@
 		BA2C882D24EC7AEA00974148 /* MyPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C882C24EC7AEA00974148 /* MyPlate.swift */; };
 		BA582E9324ECA513001A1D9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA582E9224ECA513001A1D9D /* Helpers.swift */; };
 		BA582E9524ECA5AB001A1D9D /* plates.json in Resources */ = {isa = PBXBuildFile; fileRef = BA582E9424ECA5AA001A1D9D /* plates.json */; };
-		BA9E27E824ED91CF00287E30 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E27E724ED91CF00287E30 /* Game.swift */; };
+		BA9E27E824ED91CF00287E30 /* MyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E27E724ED91CF00287E30 /* MyGame.swift */; };
 		BA9E27ED24ED92CE00287E30 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E27EC24ED92CE00287E30 /* GameList.swift */; };
 		BA9E27EF24ED930400287E30 /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E27EE24ED930400287E30 /* GameRow.swift */; };
 		BAAA4D1324EEDD3D000FD997 /* PlateMate.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BAAA4D1124EEDD3D000FD997 /* PlateMate.xcdatamodeld */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA11E9CD24F053C800D81765 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		BA11E9CF24F056A300D81765 /* Game+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+Extensions.swift"; sourceTree = "<group>"; };
+		BA11E9D124F05EDE00D81765 /* Plate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plate+Extensions.swift"; sourceTree = "<group>"; };
 		BA2C87F524EC799D00974148 /* plate-mate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "plate-mate.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA2C87F824EC799D00974148 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA2C87FA24EC799D00974148 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +70,7 @@
 		BA2C882C24EC7AEA00974148 /* MyPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlate.swift; sourceTree = "<group>"; };
 		BA582E9224ECA513001A1D9D /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BA582E9424ECA5AA001A1D9D /* plates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plates.json; sourceTree = "<group>"; };
-		BA9E27E724ED91CF00287E30 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		BA9E27E724ED91CF00287E30 /* MyGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGame.swift; sourceTree = "<group>"; };
 		BA9E27EC24ED92CE00287E30 /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 		BA9E27EE24ED930400287E30 /* GameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRow.swift; sourceTree = "<group>"; };
 		BAAA4D1224EEDD3D000FD997 /* PlateMate.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlateMate.xcdatamodel; sourceTree = "<group>"; };
@@ -173,7 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				BA2C882C24EC7AEA00974148 /* MyPlate.swift */,
-				BA9E27E724ED91CF00287E30 /* Game.swift */,
+				BA9E27E724ED91CF00287E30 /* MyGame.swift */,
+				BA11E9CF24F056A300D81765 /* Game+Extensions.swift */,
+				BA11E9D124F05EDE00D81765 /* Plate+Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				BA582E9224ECA513001A1D9D /* Helpers.swift */,
+				BA11E9CD24F053C800D81765 /* CoreDataManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -353,11 +362,14 @@
 				BA2C87F924EC799D00974148 /* AppDelegate.swift in Sources */,
 				BA2C882B24EC7ABD00974148 /* PlateRow.swift in Sources */,
 				BA2C87FB24EC799D00974148 /* SceneDelegate.swift in Sources */,
+				BA11E9D224F05EDE00D81765 /* Plate+Extensions.swift in Sources */,
+				BA11E9D024F056A300D81765 /* Game+Extensions.swift in Sources */,
+				BA11E9CE24F053C800D81765 /* CoreDataManager.swift in Sources */,
 				BA2C87FD24EC799D00974148 /* ContentView.swift in Sources */,
 				BAAA4D1324EEDD3D000FD997 /* PlateMate.xcdatamodeld in Sources */,
 				BA2C882D24EC7AEA00974148 /* MyPlate.swift in Sources */,
 				BA9E27ED24ED92CE00287E30 /* GameList.swift in Sources */,
-				BA9E27E824ED91CF00287E30 /* Game.swift in Sources */,
+				BA9E27E824ED91CF00287E30 /* MyGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct PlateList: View {
+    var title: String
+    var plates: [Plate]
     @State var text: String = ""
     @State private var isEditing = false
     
@@ -43,10 +45,11 @@ struct PlateList: View {
                }
             }
             
-            List(plateData.filter({ text.isEmpty ? true : $0.name.contains(text) })) { plate in
+            List(plates.filter({ text.isEmpty ? true : $0.name!.contains(text) })) { plate in
                     PlateRow(plate: plate)
                     .onTapGesture {
                         print("Tapped")
+                        plate.seen = true
                     }
             }
         }
@@ -55,8 +58,7 @@ struct PlateList: View {
             self.isEditing = false
             self.hideKeyboard()
         }
-        // TODO: set actual game title
-        .navigationBarTitle("Game Title")
+        .navigationBarTitle(title)
     }
     
     func hideKeyboard() {
@@ -66,6 +68,6 @@ struct PlateList: View {
 
 struct PlateList_Previews: PreviewProvider {
     static var previews: some View {
-        PlateList()
+        PlateList(title: "Road Trip", plates: plateData)
     }
 }
