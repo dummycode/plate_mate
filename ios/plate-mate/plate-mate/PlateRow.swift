@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PlateRow: View {
     var plate: Plate
+    @State var seen: Bool
     
     var body: some View {
         HStack {
@@ -23,14 +24,23 @@ struct PlateRow: View {
             
             Spacer()
             
-            if plate.seen {
+            if seen {
                 Text("Seen!")
             } else {
                 Text("Not seen")
             }
         }
-        .contentShape(Rectangle())
         .padding(10)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            self.plate.seen = !self.plate.seen
+            self.seen = self.plate.seen
+            do {
+                try CoreDataManager.shared.mainContext.save()
+            } catch {
+                print("Error deleting game")
+            }
+        }
     }
 }
 
@@ -39,7 +49,8 @@ struct PlateRow_Previews: PreviewProvider {
         let plate = Plate()
         plate.name = "Georgia"
         plate.imageName = "georgia"
+        plate.seen = false
         
-        return PlateRow(plate: plate)
+        return PlateRow(plate: plate, seen: plate.seen)
     }
 }

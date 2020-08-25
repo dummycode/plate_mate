@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct GameList: View {
-    var games: [Game] = loadGames()
+    @State var games: [Game] = loadGames()
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(games) { game in
                     self.makeGameRow(game: game)
                 }
+                .onDelete(perform: deleteGame)
             }
             .navigationBarTitle(Text("Games"))
             .navigationBarItems(trailing:           NavigationLink(destination: GameForm()) {
@@ -31,6 +33,23 @@ struct GameList: View {
             NavigationLink(destination: PlateList(title: game.name!, plates: plates ?? [])) {
                 GameRow(game: game)
             }
+    }
+    
+    func deleteGame(at offsets: IndexSet) {
+        let gamesToDelete = offsets.map { self.games[$0] }
+        games.remove(atOffsets: offsets)
+        
+        // Delete from core data
+        do {
+            try gamesToDelete.forEach { game in
+                print(game)
+                CoreDataManager.shared.mainContext.delete(game)
+                try CoreDataManager.shared.mainContext.save()
+                print(loadGames())
+            }
+        } catch {
+            print("Error deleting game")
+        }
     }
 }
 

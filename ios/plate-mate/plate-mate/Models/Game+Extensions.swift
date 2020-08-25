@@ -63,3 +63,7 @@ func saveGame(name: String) {
         print("Error saving game")
     }
 }
+
+func deleteGame(game: Game) {
+    
+}

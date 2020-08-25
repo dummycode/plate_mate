@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlateList: View {
     var title: String
-    var plates: [Plate]
+    @State var plates: [Plate]
     @State var text: String = ""
     @State private var isEditing = false
     
@@ -46,11 +46,7 @@ struct PlateList: View {
             }
             
             List(plates.filter({ text.isEmpty ? true : $0.name!.contains(text) })) { plate in
-                    PlateRow(plate: plate)
-                    .onTapGesture {
-                        print("Tapped")
-                        plate.seen = true
-                    }
+                PlateRow(plate: plate, seen: plate.seen)
             }
         }
         .onTapGesture {
