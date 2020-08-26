@@ -28,6 +28,7 @@ struct GameForm: View {
         .navigationBarItems(trailing: NavigationLink(destination: PlateList(title: name, plates: [])) {
                 Button("Save") {
                     self.createGame()
+                    PlateList(title: self.name, plates: []).transition(.scale)
                 }
             }
         )

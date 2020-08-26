@@ -13,6 +13,7 @@ struct PlateList: View {
     @State var plates: [Plate]
     @State var text: String = ""
     @State private var isEditing = false
+    @State var showSeen = false
     
     var body: some View {
         VStack {
@@ -45,7 +46,14 @@ struct PlateList: View {
                }
             }
             
-            List(plates.filter({ text.isEmpty ? true : $0.name!.contains(text) })) { plate in
+            HStack {
+                Toggle(isOn: $showSeen, label: {
+                    Text("Show Seen")
+                })
+                    .padding(.horizontal, 10)
+            }
+            
+            List(plates.filter { shouldShowPlate(plate: $0) }) { plate in
                 PlateRow(plate: plate, seen: plate.seen)
             }
         }
@@ -59,6 +67,13 @@ struct PlateList: View {
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    func shouldShowPlate(plate: Plate) -> Bool {
+        let shouldShow = showSeen || !plate.seen
+        let shouldFilter = !text.isEmpty && !plate.name!.contains(text)
+        
+        return shouldShow && !shouldFilter
     }
 }
 
