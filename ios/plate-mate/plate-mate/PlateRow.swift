@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct PlateRow: View {
-    var plate: Plate
+    @Binding var plate: Plate
     @State var seen: Bool
+    @Binding var changed: Int
     
     var body: some View {
         HStack {
@@ -25,16 +26,17 @@ struct PlateRow: View {
             Spacer()
             
             if seen {
-                Text("Seen!")
-            } else {
-                Text("Not seen")
+                Text("👀")
             }
         }
         .padding(10)
         .contentShape(Rectangle())
         .onTapGesture {
+            self.changed += 1
             self.plate.seen = !self.plate.seen
-            self.seen = self.plate.seen
+            withAnimation(.easeOut(duration: 0.2)) {
+                self.seen = self.plate.seen
+            }
             do {
                 try CoreDataManager.shared.mainContext.save()
             } catch {
@@ -45,12 +47,14 @@ struct PlateRow: View {
 }
 
 struct PlateRow_Previews: PreviewProvider {
+    @State static var plate = Plate()
+    @State static var changed = 0
+    
     static var previews: some View {
-        let plate = Plate()
         plate.name = "Georgia"
         plate.imageName = "georgia"
         plate.seen = false
         
-        return PlateRow(plate: plate, seen: plate.seen)
+        return PlateRow(plate: $plate, seen: plate.seen, changed: $changed)
     }
 }

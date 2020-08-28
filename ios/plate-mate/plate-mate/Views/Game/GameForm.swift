@@ -12,6 +12,7 @@ struct GameForm: View {
     @State var name: String = ""
     @State var usa: Bool = true
     @State var canada: Bool = false
+    @State var plates: [Plate] = []
     
     var body: some View {
         Form {
@@ -25,7 +26,7 @@ struct GameForm: View {
             }
         }
         .navigationBarTitle("New Game")
-        .navigationBarItems(trailing: NavigationLink(destination: PlateList(title: name, plates: [])) {
+        .navigationBarItems(trailing: NavigationLink(destination: PlateList(title: name, plates: plates)) {
                 Button("Save") {
                     self.createGame()
                     PlateList(title: self.name, plates: []).transition(.scale)

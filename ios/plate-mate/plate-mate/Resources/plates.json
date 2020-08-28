@@ -1,10 +1,22 @@
 [
     {
+        "name": "California",
+        "asset": "california"
+    },
+    {
+        "name": "Colorado",
+        "asset": "colorado"
+    },
+    {
         "name": "Georgia",
-        "asset": "georgia",
+        "asset": "georgia"
     },
     {
         "name": "New York",
-        "asset": "new_york",
+        "asset": "new_york"
+    },
+    {
+        "name": "Texas",
+        "asset": "texas"
     }
 ]

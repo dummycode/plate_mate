@@ -16,7 +16,7 @@ struct ContentView: View {
             GameList()
                 .tabItem {
                     VStack {
-                        Image("first")
+                        Image(systemName: "list.bullet")
                         Text("Games")
                     }
                 }
@@ -25,7 +25,7 @@ struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("second")
+                        Image(systemName: "gear")
                         Text("Settings")
                     }
                 }

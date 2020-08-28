@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PlateList: View {
     var title: String
@@ -14,6 +15,7 @@ struct PlateList: View {
     @State var text: String = ""
     @State private var isEditing = false
     @State var showSeen = false
+    @State var changed = 0
     
     var body: some View {
         VStack {
@@ -53,8 +55,10 @@ struct PlateList: View {
                     .padding(.horizontal, 10)
             }
             
-            List(plates.filter { shouldShowPlate(plate: $0) }) { plate in
-                PlateRow(plate: plate, seen: plate.seen)
+            List {
+                ForEach(plates.indices.filter({ shouldShowPlate(plate: plates[$0])}), id: \.self) { index in
+                    PlateRow(plate: self.$plates[index], seen: self.plates[index].seen, changed: self.$changed)
+                }
             }
         }
         .onTapGesture {
@@ -70,6 +74,10 @@ struct PlateList: View {
     }
     
     func shouldShowPlate(plate: Plate) -> Bool {
+        if changed < 0 {
+            return false
+        }
+        
         let shouldShow = showSeen || !plate.seen
         let shouldFilter = !text.isEmpty && !plate.name!.contains(text)
         
