@@ -9,31 +9,22 @@
 import Foundation
 import CoreData
 
-extension Game: Identifiable {
+extension Game {
     var updatedAtString: String {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
         formatter.locale = Locale(identifier: "en_US")
         formatter.setLocalizedDateFormatFromTemplate("MMddYYYY")
         
-        return formatter.string(from: updatedAt!)
+        return formatter.string(from: self.updatedAt!)
     }
-}
-
-extension Game {
-
-    @objc(addPlates:)
-    @NSManaged public func addToPlates(_ values: NSSet)
-
-    @objc(removePlates:)
-    @NSManaged public func removeFromPlates(_ values: NSSet)
-
 }
 
 
 func loadGames() -> [Game] {
     let mainContext = CoreDataManager.shared.mainContext
     let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
+    
     do {
         let results = try mainContext.fetch(fetchRequest)
         
@@ -46,7 +37,7 @@ func loadGames() -> [Game] {
     return []
 }
 
-func saveGame(name: String) {
+func saveGame(name: String) -> Game {
     let game = Game(context: CoreDataManager.shared.mainContext)
     game.name = name
     game.updatedAt = Date()
@@ -62,6 +53,8 @@ func saveGame(name: String) {
     } catch {
         print("Error saving game")
     }
+    
+    return game
 }
 
 func deleteGame(game: Game) {

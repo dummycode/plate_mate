@@ -10,67 +10,18 @@ import SwiftUI
 import Combine
 
 struct PlateList: View {
-    var title: String
+    @EnvironmentObject var game: Game
     @State var plates: [Plate]
-    @State var text: String = ""
-    @State private var isEditing = false
-    @State var showSeen = false
-    @State var changed = 0
+    @Binding var text: String
+    @Binding var showSeen: Bool
+    @Binding var changed: Int
     
     var body: some View {
-        VStack {
-            HStack {
-                TextField("Search...", text: $text)
-                    .padding(2.5)
-                    .padding(.horizontal, 10)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(6)
-                    .padding(.leading, 10)
-                    .padding(.trailing, isEditing ? 0 : 10)
-                    .onTapGesture {
-                        self.isEditing = true
-                    }
-                    .transition(.move(edge: .trailing))
-                    .animation(.default)
-    
-                if isEditing {
-                    Button(action: {
-                        self.isEditing = false
-                        self.text = ""
-                        self.hideKeyboard()
-                    }) {
-                        Text("Cancel")
-                    }
-                    .padding(.trailing, 10)
-                    .padding(.leading, 0)
-                    .transition(.move(edge: .trailing))
-                    .animation(.default)
-               }
-            }
-            
-            HStack {
-                Toggle(isOn: $showSeen, label: {
-                    Text("Show Seen")
-                })
-                    .padding(.horizontal, 10)
-            }
-            
-            List {
-                ForEach(plates.indices.filter({ shouldShowPlate(plate: plates[$0])}), id: \.self) { index in
-                    PlateRow(plate: self.$plates[index], seen: self.plates[index].seen, changed: self.$changed)
-                }
+        List {
+            ForEach(plates.indices.filter({ shouldShowPlate(plate: plates[$0])}), id: \.self) { index in
+                PlateRow(plate: self.$plates[index], seen: self.plates[index].seen, changed: self.$changed)
             }
         }
-        .onTapGesture {
-            // TODO: clear keyboard, maybe other stuff?
-            self.isEditing = false
-            self.hideKeyboard()
-        }
-        .navigationBarTitle(title)
-    }
-    
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
     func shouldShowPlate(plate: Plate) -> Bool {
@@ -86,7 +37,11 @@ struct PlateList: View {
 }
 
 struct PlateList_Previews: PreviewProvider {
+    @State static var text = ""
+    @State static var showSeen = true
+    @State static var changed = 0
+    
     static var previews: some View {
-        PlateList(title: "Road Trip", plates: plateData)
+        PlateList(plates: [], text: $text, showSeen: $showSeen, changed: $changed)
     }
 }

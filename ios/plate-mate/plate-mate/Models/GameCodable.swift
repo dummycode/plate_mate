@@ -1,13 +1,13 @@
 //
-//  Plate.swift
+//  GameCodable.swift
 //  plate-mate
 //
-//  Created by Henry Harris on 8/18/20.
-//  Copyright © 2020 Henry Harris. All rights reserved.
+//  Created by Henry Harris on 2/21/21.
+//  Copyright © 2021 Henry Harris. All rights reserved.
 //
 
 import Foundation
-import SwiftUI
+
 
 let codablePlateData: [CodablePlate] = load("plates.json")
 

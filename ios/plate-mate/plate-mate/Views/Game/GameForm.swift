@@ -12,7 +12,9 @@ struct GameForm: View {
     @State var name: String = ""
     @State var usa: Bool = true
     @State var canada: Bool = false
-    @State var plates: [Plate] = []
+    
+    @State var game: Game? = nil
+    @State var create: Bool = false
     
     var body: some View {
         Form {
@@ -26,18 +28,22 @@ struct GameForm: View {
             }
         }
         .navigationBarTitle("New Game")
-        .navigationBarItems(trailing: NavigationLink(destination: PlateList(title: name, plates: plates)) {
-                Button("Save") {
-                    self.createGame()
-                    PlateList(title: self.name, plates: []).transition(.scale)
-                }
+        .navigationBarItems(trailing: Button("Save") {
+            game = createGame()
+        })
+        
+        if (create) {
+            NavigationLink(destination: GameView(game: game!), isActive: $create) {
+                EmptyView()
             }
-        )
+        }
     }
     
-    func createGame() {
+    
+    func createGame() -> Game {
         print("Creating game")
-        saveGame(name: name)
+        create = true
+        return saveGame(name: name)
     }
 }
 

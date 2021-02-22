@@ -20,7 +20,7 @@ struct GameList: View {
                 .onDelete(perform: deleteGame)
             }
             .navigationBarTitle(Text("Games"))
-            .navigationBarItems(trailing:           NavigationLink(destination: GameForm()) {
+            .navigationBarItems(trailing: NavigationLink(destination: GameForm()) {
                     Text("New")
                 }
             )
@@ -28,9 +28,8 @@ struct GameList: View {
     }
     
     func makeGameRow(game: Game) -> some View {
-        let plates = game.plates!.array as? [Plate]
         return
-            NavigationLink(destination: PlateList(title: game.name!, plates: plates ?? [])) {
+            NavigationLink(destination: GameView(game: game)) {
                 GameRow(game: game)
             }
     }

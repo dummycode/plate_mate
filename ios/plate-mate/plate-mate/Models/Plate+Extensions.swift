@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-extension Plate: Identifiable {
+extension Plate {
     var image: Image {
         Image("plates/" + imageName!)
     }
@@ -26,12 +26,14 @@ func createPlate(name: String, imageName: String) -> Plate {
     return plate
 }
 
-func savePlate(name: String, imageName: String) {
-    let _ = createPlate(name: name, imageName: imageName)
+func savePlate(name: String, imageName: String) -> Plate {
+    let plate = createPlate(name: name, imageName: imageName)
     
     do {
         try CoreDataManager.shared.mainContext.save()
     } catch {
         print("Error saving plate")
     }
+    
+    return plate
 }
