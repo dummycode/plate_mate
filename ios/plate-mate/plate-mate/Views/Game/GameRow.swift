@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct GameRow: View {
-    var game: Game
+    @State var game: Game
     
     var body: some View {
         HStack {

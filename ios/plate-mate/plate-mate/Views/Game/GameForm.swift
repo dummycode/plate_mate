@@ -16,6 +16,8 @@ struct GameForm: View {
     @State var game: Game? = nil
     @State var create: Bool = false
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         Form {
             TextField("Name", text: $name)
@@ -32,17 +34,18 @@ struct GameForm: View {
             game = createGame()
         })
         
-        if (create) {
-            NavigationLink(destination: GameView(game: game!), isActive: $create) {
-                EmptyView()
-            }
-        }
+//        if (create) {
+//            NavigationLink(destination: GameList(), isActive: $create) {
+//                EmptyView()
+//            }
+//        }
     }
     
     
     func createGame() -> Game {
         print("Creating game")
         create = true
+        presentationMode.wrappedValue.dismiss()
         return saveGame(name: name)
     }
 }

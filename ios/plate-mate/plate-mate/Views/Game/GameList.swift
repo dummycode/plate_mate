@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct GameList: View {
-    @State var games: [Game] = loadGames()
+    @ObservedObject var games: Games = Games(games: loadGames())
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(games) { game in
+                ForEach(games.games) { game in
                     self.makeGameRow(game: game)
                 }
                 .onDelete(perform: deleteGame)
@@ -35,8 +35,8 @@ struct GameList: View {
     }
     
     func deleteGame(at offsets: IndexSet) {
-        let gamesToDelete = offsets.map { self.games[$0] }
-        games.remove(atOffsets: offsets)
+        let gamesToDelete = offsets.map { games.games[$0] }
+        games.games.remove(atOffsets: offsets)
         
         // Delete from core data
         do {

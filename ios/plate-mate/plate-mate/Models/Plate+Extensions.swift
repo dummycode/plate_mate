@@ -12,7 +12,7 @@ import SwiftUI
 
 extension Plate {
     var image: Image {
-        Image("plates/" + imageName!)
+        Image("plates/" + (imageName ?? ""))
     }
 }
 

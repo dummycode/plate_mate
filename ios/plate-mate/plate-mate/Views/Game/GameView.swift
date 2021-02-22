@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 struct GameView: View {
-    @ObservedObject var game: Game
+    @State var game: Game
     @State var text: String = ""
     @State private var isEditing = false
     @State var showSeen = false
@@ -54,7 +54,7 @@ struct GameView: View {
                     .padding(.horizontal, 10)
             }
             
-            PlateList(plates: game.plates?.array as! [Plate], text: self.$text, showSeen: self.$showSeen, changed: self.$changed)
+            PlateList(plates: (game.plates?.array ?? []) as! [Plate], text: self.$text, showSeen: self.$showSeen, changed: self.$changed)
             
         }
         .onTapGesture {
@@ -83,9 +83,8 @@ struct GameView: View {
 }
 
 struct GameView_Previews: PreviewProvider {
-    static var game = Game()
-    
     static var previews: some View {
+        let game = Game()
         game.plates = []
         game.name = "Preview Game"
         

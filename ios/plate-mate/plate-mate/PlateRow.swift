@@ -40,7 +40,7 @@ struct PlateRow: View {
             do {
                 try CoreDataManager.shared.mainContext.save()
             } catch {
-                print("Error deleting game")
+                print("Error updating row")
             }
         }
     }
