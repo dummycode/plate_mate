@@ -18,6 +18,11 @@ extension Plate {
     func copy() -> Plate {
         return createPlate(name: name!, imageName: imageName!)
     }
+    
+    func toggleSeen() {
+        seen = !seen;
+        game?.updatedAt = Date()
+    }
 }
 
 func createPlate(name: String, imageName: String) -> Plate {

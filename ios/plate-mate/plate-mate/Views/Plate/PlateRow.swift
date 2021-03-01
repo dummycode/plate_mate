@@ -35,19 +35,7 @@ struct PlateRow: View {
             .padding(10)
             .contentShape(Rectangle())
             .onTapGesture {
-                self.changed += 1
-                
-                self.plate.seen = !self.plate.seen
-                
-                withAnimation(.easeOut(duration: 0.5)) {
-                    self.plate.seen = self.plate.seen
-                }
-                
-                do {
-                    try CoreDataManager.shared.mainContext.save()
-                } catch {
-                    print("Error updating row")
-                }
+                toggleSeen()
             }
         }
     }
@@ -61,6 +49,22 @@ struct PlateRow: View {
         let shouldFilter = !text.isEmpty && !plate.name!.lowercased().contains(text.lowercased())
         
         return shouldShow && !shouldFilter
+    }
+    
+    func toggleSeen() {
+        changed += 1
+        
+        plate.toggleSeen()
+        
+        withAnimation(.easeOut(duration: 0.5)) {
+            plate.seen = plate.seen
+        }
+        
+        do {
+            try CoreDataManager.shared.mainContext.save()
+        } catch {
+            print("Error updating row")
+        }
     }
 }
 

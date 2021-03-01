@@ -54,7 +54,13 @@ struct GameView: View {
                 .padding(.horizontal, 10)
             }
             
-            PlateList(plates: (game.plates?.array ?? []) as! [Plate], text: $text, showSeen: $showSeen, changed: $changed)
+            if game.plates!.filter { !seen(plate: $0 as! Plate) }.count > 0 || showSeen {
+                PlateList(plates: (game.plates?.array ?? []) as! [Plate], text: $text, showSeen: $showSeen, changed: $changed)
+            } else {
+                Spacer()
+                Text("Wow! You've seen them all!")
+                Spacer()
+            }
             
         }
         .onTapGesture {
@@ -62,6 +68,10 @@ struct GameView: View {
             self.hideKeyboard()
         }
         .navigationBarTitle(game.name!)
+    }
+    
+    func seen(plate: Plate) -> Bool {
+        return plate.seen
     }
     
     func hideKeyboard() {
