@@ -18,9 +18,10 @@ struct PlateList: View {
     
     var body: some View {
         List {
-            ForEach(plates.indices.filter({ shouldShowPlate(plate: plates[$0])}), id: \.self) { index in
-                PlateRow(plate: self.$plates[index], seen: self.plates[index].seen, changed: self.$changed)
+            ForEach(plates.indices, id: \.self) { index in
+                PlateRow(plate: self.$plates[index], changed: self.$changed, text: $text, showSeen: $showSeen)
             }
+            
         }
     }
     

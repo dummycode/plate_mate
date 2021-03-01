@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct GameForm: View {
+    @State var games: Games
+    
     @State var name: String = ""
     @State var usa: Bool = true
     @State var canada: Bool = false
     
-    @State var game: Game? = nil
     @State var create: Bool = false
     
     @Environment(\.presentationMode) var presentationMode
@@ -31,27 +32,23 @@ struct GameForm: View {
         }
         .navigationBarTitle("New Game")
         .navigationBarItems(trailing: Button("Save") {
-            game = createGame()
+            createGame()
         })
-        
-//        if (create) {
-//            NavigationLink(destination: GameList(), isActive: $create) {
-//                EmptyView()
-//            }
-//        }
     }
     
     
-    func createGame() -> Game {
+    func createGame() {
         print("Creating game")
-        create = true
+        
+        let game = saveGame(name: name)
+        games.addGame(game: game)
+        
         presentationMode.wrappedValue.dismiss()
-        return saveGame(name: name)
     }
 }
 
 struct GameForm_Previews: PreviewProvider {
     static var previews: some View {
-        GameForm()
+        GameForm(games: Games(games: []))
     }
 }

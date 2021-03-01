@@ -14,6 +14,10 @@ extension Plate {
     var image: Image {
         Image("plates/" + (imageName ?? ""))
     }
+    
+    func copy() -> Plate {
+        return createPlate(name: name!, imageName: imageName!)
+    }
 }
 
 func createPlate(name: String, imageName: String) -> Plate {

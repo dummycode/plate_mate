@@ -17,10 +17,10 @@ struct GameList: View {
                 ForEach(games.games) { game in
                     self.makeGameRow(game: game)
                 }
-                .onDelete(perform: deleteGame)
+                .onDelete(perform: deleteGameAtIndex)
             }
             .navigationBarTitle(Text("Games"))
-            .navigationBarItems(trailing: NavigationLink(destination: GameForm()) {
+            .navigationBarItems(trailing: NavigationLink(destination: GameForm(games: games)) {
                     Text("New")
                 }
             )
@@ -34,20 +34,13 @@ struct GameList: View {
             }
     }
     
-    func deleteGame(at offsets: IndexSet) {
+    func deleteGameAtIndex(at offsets: IndexSet) {
         let gamesToDelete = offsets.map { games.games[$0] }
         games.games.remove(atOffsets: offsets)
         
         // Delete from core data
-        do {
-            try gamesToDelete.forEach { game in
-                print(game)
-                CoreDataManager.shared.mainContext.delete(game)
-                try CoreDataManager.shared.mainContext.save()
-                print(loadGames())
-            }
-        } catch {
-            print("Error deleting game")
+        gamesToDelete.forEach { game in
+            deleteGame(game: game)
         }
     }
 }

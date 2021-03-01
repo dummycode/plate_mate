@@ -42,7 +42,7 @@ func saveGame(name: String) -> Game {
     game.name = name
     game.updatedAt = Date()
     
-    let plates: [Plate] = plateData
+    let plates: [Plate] = plateData.map { $0.copy() }
     
     plates.forEach { plate in
         game.addToPlates(plate)
@@ -58,5 +58,10 @@ func saveGame(name: String) -> Game {
 }
 
 func deleteGame(game: Game) {
-    
+    CoreDataManager.shared.mainContext.delete(game)
+    do {
+        try CoreDataManager.shared.mainContext.save()
+    } catch {
+        print("Error deleting game")
+    }
 }

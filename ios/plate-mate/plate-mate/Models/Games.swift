@@ -12,6 +12,10 @@ class Games: ObservableObject{
     @Published var games: [Game]
 
     init(games: [Game]) {
-        self.games = games
+        self.games = games.sorted(by: { $0.updatedAt! > $1.updatedAt! })
+    }
+    
+    func addGame(game: Game) {
+        games.insert(game, at: 0)
     }
 }

@@ -51,14 +51,13 @@ struct GameView: View {
                 Toggle(isOn: $showSeen, label: {
                     Text("Show Seen")
                 })
-                    .padding(.horizontal, 10)
+                .padding(.horizontal, 10)
             }
             
-            PlateList(plates: (game.plates?.array ?? []) as! [Plate], text: self.$text, showSeen: self.$showSeen, changed: self.$changed)
+            PlateList(plates: (game.plates?.array ?? []) as! [Plate], text: $text, showSeen: $showSeen, changed: $changed)
             
         }
         .onTapGesture {
-            // TODO: clear keyboard, maybe other stuff?
             self.isEditing = false
             self.hideKeyboard()
         }
@@ -67,18 +66,6 @@ struct GameView: View {
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-    
-    /// Returns whether a plate should be shown or not based on current search and filter rules
-    func shouldShowPlate(plate: Plate) -> Bool {
-        if changed < 0 {
-            return false
-        }
-        
-        let shouldShow = showSeen || !plate.seen
-        let shouldFilter = !text.isEmpty && !plate.name!.contains(text)
-        
-        return shouldShow && !shouldFilter
     }
 }
 
